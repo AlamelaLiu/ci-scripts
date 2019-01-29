@@ -54,9 +54,20 @@ function ipmi_power_off() {
     ipmitool -H ${IPMI_IP} -I lanplus -U ${IPMI_USER} -P ${IPMI_PASS} power off
 }
 
+# ensure poweroff the device
+function bmc_reset() {
+    local IPMI_PASS="Huawei12#$"
+    local IPMI_USER=root
+    local IPMI_IP=${BMC_IP}
+
+    ./reset_bmc.sh ${IPMI_USER} ${IPMI_IP} ${IPMI_PASS} || true
+}
 function do_deploy() {
     # close the device first. so that if install fail , it will not mount the old system
     ipmi_power_off
+    sleep 10
+    bmc_reset
+    sleep 10
     if [ "${BOOT_PLAN}" = "BOOT_PXE" ];then
         :
     elif [ "${BOOT_PLAN}" = "BOOT_ISO" ];then
