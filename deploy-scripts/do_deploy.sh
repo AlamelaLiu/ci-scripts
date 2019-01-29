@@ -32,7 +32,7 @@ function bmc_vmm_connect() {
     local SSH_IP=${BMC_IP}
 
     init_os_dict
-    sshpass -p ${SSH_PASS} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${SSH_USER}@${SSH_IP} \
+    timeout 360 sshpass -p ${SSH_PASS} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${SSH_USER}@${SSH_IP} \
             ipmcset -t vmm -d connect -v nfs://${NFS_BMC_IP}/var/lib/lava/dispatcher/tmp/iso_install/arm64/estuary/${version_name}/"${distro_name}"/"${DEVICE_TYPE,,}"/auto-install.iso
 }
 
@@ -42,7 +42,7 @@ function bmc_vmm_disconnect() {
     local SSH_USER=root
     local SSH_IP=${BMC_IP}
 
-    sshpass -p ${SSH_PASS} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${SSH_USER}@${SSH_IP} ipmcset -t vmm -d disconnect
+    timeout 120 sshpass -p ${SSH_PASS} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${SSH_USER}@${SSH_IP} ipmcset -t vmm -d disconnect
 }
 
 # ensure poweroff the device
@@ -65,9 +65,9 @@ function bmc_reset() {
 function do_deploy() {
     # close the device first. so that if install fail , it will not mount the old system
     ipmi_power_off
-    sleep 10
-    bmc_reset
-    sleep 10
+    #sleep 10
+    #bmc_reset
+    #sleep 10
     if [ "${BOOT_PLAN}" = "BOOT_PXE" ];then
         :
     elif [ "${BOOT_PLAN}" = "BOOT_ISO" ];then
