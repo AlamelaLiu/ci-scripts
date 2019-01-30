@@ -76,7 +76,8 @@ function do_deploy() {
         bmc_vmm_disconnect || true
         sleep 10
         # successfully is the vmm connect successs output
-        bmc_vmm_connect | grep 'successfully'
+        #bmc_vmm_connect | grep 'successfully'
+        bmc_vmm_connect 
     fi
 
     # do deploy
