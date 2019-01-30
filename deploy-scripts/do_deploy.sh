@@ -66,15 +66,15 @@ function do_deploy() {
     # close the device first. so that if install fail , it will not mount the old system
     ipmi_power_off
     sleep 5
+    bmc_vmm_disconnect || true
+    sleep 10
     bmc_reset
-    sleep 5
+    sleep 10
     if [ "${BOOT_PLAN}" = "BOOT_PXE" ];then
         :
     elif [ "${BOOT_PLAN}" = "BOOT_ISO" ];then
         :
         # mount iso
-        bmc_vmm_disconnect || true
-        sleep 10
         # successfully is the vmm connect successs output
         #bmc_vmm_connect | grep 'successfully'
         bmc_vmm_connect 
