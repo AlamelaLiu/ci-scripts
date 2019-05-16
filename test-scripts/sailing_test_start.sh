@@ -14,9 +14,11 @@ function download_repo()
 {
    
    pushd /fileserver
-   ls | grep `echo ${TEST_REPO} | cut -d '/' -f 5 | cut -d '.' -f 1`
+   DIR_NAME=`echo ${TEST_REPO} | cut -d '/' -f 5 | cut -d '.' -f 1`
+   TEST_CASE_DIR=/fileserver/${DIR_NAME}
+   ls | grep ${DIR_NAME}
    if [ $? -eq '0' ];then
-      pushd `echo ${TEST_REPO} | cut -d '/' -f 5 | cut -d '.' -f 1`
+      pushd ${DIR_NAME}
       git pull 
       popd
    else
@@ -30,8 +32,10 @@ function main()
    DUT_IP=$1
    TEST_REPO=$2
    SCOPE=$3
-   
+  
+   set_device 
    download_repo
+   python estuary-ci-job-creator.py  --testUrl "${TEST_REPO}" --testDir "${TEST_CASE_DIR}" --scope "${TEST_SCOPE}"
    pwd 
 }
 
