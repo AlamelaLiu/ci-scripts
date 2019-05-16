@@ -35,7 +35,7 @@ function main()
   
    set_device 
    download_repo
-   python estuary-ci-job-creator.py  --testUrl "${TEST_REPO}" --testDir "${TEST_CASE_DIR}" --scope "${TEST_SCOPE}"
+   python sailing-ci-job-creator.py  --testUrl "${TEST_REPO}" --testDir "${TEST_CASE_DIR}" --scope "${TEST_SCOPE}"
    pwd 
 }
 
