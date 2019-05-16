@@ -10,9 +10,29 @@ __ORIGIN_PATH__="$PWD"
 script_path="${0%/*}"  # remove the script name ,get the path
 script_path=${script_path/\./$(pwd)} # if path start with . , replace with $PWD
 
+function download_repo()
+{
+   
+   pushd /fileserver
+   ls | grep `echo ${TEST_REPO} | cut -d '/' -f 5 | cut -d '.' -f 1`
+   if [ $? -eq '0' ];then
+      pushd `echo ${TEST_REPO} | cut -d '/' -f 5 | cut -d '.' -f 1`
+      git pull 
+      popd
+   else
+      git clone $TEST_REPO
+   fi
+   popd
+}
+
 function main()
 {
-   echo $1 $2
+   DUT_IP=$1
+   TEST_REPO=$2
+   SCOPE=$3
+   
+   download_repo
+   pwd 
 }
 
 main "$@"
