@@ -36,7 +36,7 @@ function main()
    pushd ${script_path}
    #set_device 
    download_repo
-   python sailing-ci-job-creator.py  --testUrl "${TEST_REPO}" --testDir "${TEST_CASE_DIR}" --scope "${TEST_SCOPE}"
+   python sailing-ci-job-creator.py http://192.168.2.111:8083/open-estuary/daily_20190507/d05-arm64 --testUrl "${TEST_REPO}" --testDir "${TEST_CASE_DIR}" --scope "${TEST_SCOPE}"
    pwd 
    popd
 }
