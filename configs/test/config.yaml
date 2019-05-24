@@ -39,14 +39,14 @@ LAVA:
     lavaserver: http://192.168.2.111/RPC2/
     lavastream: /anonymous/admin/
     lavauser: admin
-    lavaurl: http://203.160.91.226
-    LAVA_DISPLAY_URL: http://203.160.91.226:180
+    lavaurl: http://192.168.2.111
+    LAVA_DISPLAY_URL: http://192.168.2.111:80
 
 # for lava job parameter
 Jenkins:
     url: http://192.168.2.111:8080
     Boot: BOOT_NFS
-    JENKINS_DISPLAY_URL: http://203.160.91.226:18080
+    JENKINS_DISPLAY_URL: http://192.168.2.111:8080
 
 Test:
     Plan: '*'

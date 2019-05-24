@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    ci_env = 'dev'
+    ci_env = 'test'
     if 'CI_ENV' in os.environ:
         ci_env = os.environ['CI_ENV']
 
