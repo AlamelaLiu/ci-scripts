@@ -4,6 +4,8 @@ def clone2local(giturl, branchname, localdir) {
         new File(localdir).mkdir()
     }
     dir (localdir) {
+        print giturl
+        print branchname
         checkout([$class: 'GitSCM', branches: [[name: branchname]],
                 extensions: [[$class: 'CloneOption', timeout: 120]], gitTool: 'Default',
                 userRemoteConfigs: [[url: giturl]]
