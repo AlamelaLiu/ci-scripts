@@ -57,7 +57,7 @@ Test:
 # for kernelci access
 Ftpinfo:
     ftpserver: http://192.168.2.111:8083
-    FTPSERVER_DISPLAY_URL: http://203.160.91.226:18083
+    FTPSERVER_DISPLAY_URL: http://192.168.2.111:8083
     FTP_DIR : /fileserver
     STASH_DIR : /home/fileserver
 
