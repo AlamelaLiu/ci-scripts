@@ -323,8 +323,10 @@ def generate_job_file(cwd,
 
                         tmp = tmp.replace('{job_name}',
                                           CONFIG.get("jenkinsJob") + "-" + job_json.split("/")[-1].split(".yaml")[0])
-                        if distro == 'OpenSuse':
+                        if distro == 'Suse':
                             tmp = tmp.replace('{distro}', 'oe')
+                        elif distro == 'Redhat':
+                            tmp = tmp.replace('{distro}', 'fedora')
                         else:
                             tmp = tmp.replace('{distro}', distro.lower())
 
@@ -501,7 +503,7 @@ if __name__ == '__main__':
             'MEDIUM', 'LOW'],
                         help="priority for LAVA jobs")
     parser.add_argument("--distro", choices=['Ubuntu', 'OpenSuse', 'Debian',
-            'Fedora', 'CentOS'],
+            'Fedora', 'CentOS', 'Redhat', 'Suse'],
                         help="distro for sata deploying")
     args = vars(parser.parse_args())
     main(args)
