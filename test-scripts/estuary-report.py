@@ -1171,7 +1171,7 @@ if __name__ == '__main__':
     parser.add_argument("--lab", help="lab id")
     parser.add_argument("--testDir", required=True, help="specific test case dir")
     parser.add_argument("--distro", choices=['Ubuntu', 'Debian', 'CentOS',
-                                             'OpenSuse', 'Fedora'],
+                                             'OpenSuse', 'Fedora', 'Redhat', 'Suse'],
                         help="distro for sata deploying")
     parser.add_argument("--scope", help="test case group", default="*")
     parser.add_argument("--level", help="test case level", default="1")
